@@ -54,7 +54,13 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("SP_USER", MODE_PRIVATE);
         uid = prefs.getString("Current_USERID", "NA");
         databaseDrivers = FirebaseDatabase.getInstance().getReference("drivers");
-        databaseDrivers.child(uid).addValueEventListener(new ValueEventListener() {
+
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        rootRef.child("drivers").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.hasChild(uid)) {
+                            databaseDrivers.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Driver driver = dataSnapshot.getValue(Driver.class);
@@ -70,6 +76,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
