@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnGetLocation;
     TextView showLocation;
     LocationManager locationManager;
-    String latitude, longitude;
+    String latitude="0", longitude="0";
     String veh_no="NA",phone_no="NA";
 
     String uid;
