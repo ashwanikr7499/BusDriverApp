@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                         String emailId = user.getEmail();
                         String domain = emailId.split("@")[1];
 
-                        if(domain.contains("ism") || true){
+                        if(domain.contains("ism") ){
 //                            Toast.makeText(com.example.campustransport.LoginActivity.this, "" + user.getEmail(), Toast.LENGTH_SHORT).show();
 
                             checkUserStatus();
